@@ -1,0 +1,201 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Serverless TTS Reader</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="carousel.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="index.html">HiPolly</a>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
+          
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <button class="btn btn-outline-light my-2 my-sm-0" onclick="{location.href='https://hipolly.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=4lpu6ura2n3m1duon6brn9p646&redirect_uri=http://localhost'}">Log in </button>
+          <button class="btn btn-light my-2 my-sm-0" style="margin:20px"onclick="{location.href='https://hipolly.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=4lpu6ura2n3m1duon6brn9p646&redirect_uri=http://localhost'}">Sign up </button>
+        </div>
+ 
+      </nav>
+    </header>
+
+    <main role="main" style="margin:100px;">
+
+      <div class="container marketing">
+
+        <div class="row featurette">
+          <div class="row">
+            <div class="col-lg-4">
+              <img src="assets/text.png" style="width:100px;height:100px;">
+              <h2>Input text</h2>
+              <p>Users are able to input any texts and convert them into voices.</p>
+              <p><button type="button" class="btn btn-secondary" id="inputTextBtn" data-toggle="modal" data-target="#inputText" align="center">Input Text</button></p>
+            </div>
+            <div class="col-lg-4">
+              <img src="assets/upload.png" style="width:100px;height:100px;">
+              <h2>Upload e-books</h2>
+              <p>Users are able to upload e-books of txt format and convert them into voices.</p>
+              <p><button type="button" class="btn btn-secondary" id="inputTextBtn" data-toggle="modal" data-target="#uploadFiles" align="center">Upload</button></p>
+            </div>
+            <div class="col-lg-4">
+              <img src="assets/library.png" style="width:100px;height:100px;">
+              <h2>My library</h2>
+              <p>Users will have their own libraries where self-created books and audios as well as stared public resoucers are stored.</p>
+              <p><button class="btn btn-secondary" onclick="{location.href='mylibrary.html'}" align="center">My Library</button></p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+      </div> 
+
+      <!-- The Modal -->
+      <div class="modal fade" id="inputText" style="margin: auto;" data-backdrop="true" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Input your texts here</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              Voice:
+                    <select class="selectpicker" id="voiceSelected" >
+                            <option value="Joanna">Joanna [English]</option>
+                            <option value="Maja">Maja [Polish]</option>
+                            <option value="Enrique">Enrique [Spanish]</option>
+                            <option value="Marlene">Marlene [German]</option>
+                            <option value="Mathieu">Mathieu [French]</option>
+                            <option value="Cristiano">Cristiano [Portuquese]</option>
+                            <option value="Liv">Liv [Norwegian]</option>
+                            <option value="Mizuki">Mizuki [Japanese]</option>
+                            <option value="Carla">Carla [Italian]</option>
+                            <option value="Carmen">Carmen [Romanian]</option>
+                            <option value="Tatyana">Tatyana [Russian]</option>
+                            <option value="Astrid">Astrid [Swedish]</option>
+                            <option value="Filiz">Filiz [Turkish]</option>
+                            <option value="Gwyneth">Gwyneth [Welsh]</option>
+                            <option value="Karl">Karl [Icelandic]</option>
+                          </select>
+                          <button id="sayButton" class="btn btn-secondary">Add</button>
+                </br></br>
+                Title:
+                </br>
+                <input type="text" class="form-control" id="title">
+                </br>
+                Content:
+                <textarea class="form-control" id ="postText" rows="10"></textarea>
+                </br>
+                Available to others?
+                <select class="custom-select" id="property">
+                  <option selected>Choose...</option>
+                  <option value="private">Private</option>
+                  <option value="public">Public</option>
+                </select>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="uploadFiles" style="margin: auto;" data-backdrop="true" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Upload your txt files here</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              Voice:
+                    <select class="selectpicker" id="voiceSelected" >
+                            <option value="Joanna">Joanna [English]</option>
+                            <option value="Maja">Maja [Polish]</option>
+                            <option value="Enrique">Enrique [Spanish]</option>
+                            <option value="Marlene">Marlene [German]</option>
+                            <option value="Mathieu">Mathieu [French]</option>
+                            <option value="Cristiano">Cristiano [Portuquese]</option>
+                            <option value="Liv">Liv [Norwegian]</option>
+                            <option value="Mizuki">Mizuki [Japanese]</option>
+                            <option value="Carla">Carla [Italian]</option>
+                            <option value="Carmen">Carmen [Romanian]</option>
+                            <option value="Tatyana">Tatyana [Russian]</option>
+                            <option value="Astrid">Astrid [Swedish]</option>
+                            <option value="Filiz">Filiz [Turkish]</option>
+                            <option value="Gwyneth">Gwyneth [Welsh]</option>
+                            <option value="Karl">Karl [Icelandic]</option>
+                          </select>
+                          <button id="sayButton" class="btn btn-secondary">Add</button>
+                </br></br>
+                Title:
+                </br>
+                <input type="text" class="form-control" id="title">
+                </br>
+                File:
+                <form>
+                  <div class="form-group">
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                  </div>
+                </form>
+                </br>
+                Available to others?
+                <select class="custom-select" id="property">
+                  <option selected>Choose...</option>
+                  <option value="private">Private</option>
+                  <option value="public">Public</option>
+                </select>
+                
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="container">
+      <p>&copy; Chloe | Chelsea 2018</p>
+    </footer>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script src="user.js"></script>
+  </body>
+
+</html>
