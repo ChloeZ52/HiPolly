@@ -26,8 +26,12 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
           </ul>
+<<<<<<< HEAD
+          <div id="usernameShow"></div>
+=======
           <button class="btn btn-outline-light my-2 my-sm-0" onclick="{location.href='https://hipolly52.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=55h39llc2hrj73id20mnhnvbou&redirect_uri=http://localhost'}">Log in </button>
           <button class="btn btn-light my-2 my-sm-0" style="margin:20px"onclick="{location.href='https://hipolly52.auth.us-east-1.amazoncognito.com/signup?response_type=token&client_id=55h39llc2hrj73id20mnhnvbou&redirect_uri=http://localhost'}">Sign up </button>
+>>>>>>> ec810816f3cc057d91058fe91e2aaa9f0ebbacea
         </div>
  
       </nav>
@@ -94,7 +98,7 @@
                             <option value="Gwyneth">Gwyneth [Welsh]</option>
                             <option value="Karl">Karl [Icelandic]</option>
                           </select>
-                          <button id="sayButton" class="btn btn-secondary">Add</button>
+                          <button id="sayButton" class="btn btn-secondary" data-dismiss="modal">Add</button>
                 </br></br>
                 Title:
                 </br>
@@ -104,7 +108,7 @@
                 <textarea class="form-control" id ="postText" rows="10"></textarea>
                 </br>
                 Available to others?
-                <select class="custom-select" id="property">
+                <select class="custom-select" id="propertySelected">
                   <option selected>Choose...</option>
                   <option value="private">Private</option>
                   <option value="public">Public</option>
@@ -150,7 +154,7 @@
                             <option value="Gwyneth">Gwyneth [Welsh]</option>
                             <option value="Karl">Karl [Icelandic]</option>
                           </select>
-                          <button id="sayButton" class="btn btn-secondary">Add</button>
+                          <button id="uploadButton" class="btn btn-secondary" data-dismiss="modal">Add</button>
                 </br></br>
                 Title:
                 </br>
@@ -195,6 +199,7 @@
     <!-- Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+    <script src="amazon-cognito-identity.min.js"></script>
     <script src="user.js"></script>
   </body>
 

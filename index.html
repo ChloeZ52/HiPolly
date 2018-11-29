@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -26,8 +25,15 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
           </ul>
+<<<<<<< HEAD
+          <button type="button" class="btn btn-outline-light my-2 my-sm-0" id="loginBtn" data-toggle="modal" data-target="#loginModal">Log In</button>
+          <button type="button" class="btn btn-light my-2 my-sm-0" id="signupBtn" data-toggle="modal" data-target="#signupModal" style="margin:20px">Sign Up</button>
+          <div id="usernameShow"></div>
+
+=======
           <button class="btn btn-outline-light my-2 my-sm-0" onclick="{location.href='https://hipolly52.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=55h39llc2hrj73id20mnhnvbou&redirect_uri=http://localhost'}">Log in </button>
           <button class="btn btn-light my-2 my-sm-0" style="margin:20px"onclick="{location.href='https://hipolly52.auth.us-east-1.amazoncognito.com/signup?response_type=token&client_id=55h39llc2hrj73id20mnhnvbou&redirect_uri=http://localhost'}">Sign up </button>
+>>>>>>> ec810816f3cc057d91058fe91e2aaa9f0ebbacea
         </div>
  
       </nav>
@@ -111,6 +117,107 @@
         <hr class="featurette-divider">
       </div>
 
+      <!-- The Modal -->
+      <!-- Sign Up -->
+      <div class="modal fade" id="signupModal" style="margin: auto;" data-backdrop="true" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Sign Up</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <label for="inputUsername" class="sr-only">Username</label>
+                <input type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+                </br>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
+                </br>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                - Minimum length 6 </br>
+                - Require numbers </br>
+                - Require special characters </br>
+                - Require uppercase letters </br>
+                - Require lowercase letters </br>
+                </br>
+                <button class="btn btn-primary" type="submit" id="signup">Sign up</button>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Verification -->
+      <div class="modal fade" id="veriModal" style="margin: auto;" data-backdrop="true" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Verification</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p id="veriReminder"> Please enter the verification code from your email.</p>
+                <label for="verificationCode" class="sr-only">Verification Code</label>
+                <input type="verificationCode" id="verificationCode" class="form-control" placeholder="Verification Code" required>
+                </br>
+                <button class="btn btn-primary" type="submit" id="veri">Submit</button>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Log In -->
+      <div class="modal fade" id="loginModal" style="margin: auto;" data-backdrop="true" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Log In</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="email" id="inputEmailLogin" class="form-control" placeholder="Email" required autofocus>
+                </br>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPasswordLogin" class="form-control" placeholder="Password" required>
+                </br>
+                <button class="btn btn-primary" type="submit" id="login">Log In</button>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
   </main>
 
     <footer class="container">
@@ -126,11 +233,18 @@
     <!-- Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-    <script src="scripts.js"></script>
+    <script src="amazon-cognito-identity.min.js"></script>
+    <script src="cognito.js"></script>
     <script crossorigin="anonymous">
-              var player = "<audio controls><source src='https://s3.amazonaws.com/hipolly-audiofiles/demo.mp3' type='audio/mpeg' crossorigin='anonymous'></audio>";
+              var player = "<audio controls><source src='assets/demo.mp3' type='audio/mpeg' crossorigin='anonymous'></audio>";
               $("#audio").load(player);
-            </script>
+    </script>
   </body>
 
 </html>
+
+
+
+
+
+
