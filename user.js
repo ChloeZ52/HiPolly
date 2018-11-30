@@ -20,8 +20,6 @@ if (cognitoUser != null) {
         	console.log('session validity: ' + session.isValid());
     	}
     });
-    $('#loginBtn').hide();
-	$('#signupBtn').hide();
 
     cognitoUser.getUserAttributes(function(err, attributes) {
         if (err) {

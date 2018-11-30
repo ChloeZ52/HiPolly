@@ -8,7 +8,7 @@
     <meta name="author" content="">
   
 
-    <title> My Post</title>
+    <title>My Post</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -27,14 +27,13 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
           </ul>
-          <button class="btn btn-outline-light my-2 my-sm-0" onclick="{location.href='https://hipolly.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=4lpu6ura2n3m1duon6brn9p646&redirect_uri=http://localhost'}">Log in </button>
-          <button class="btn btn-light my-2 my-sm-0" style="margin:20px"onclick="{location.href='https://hipolly.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=4lpu6ura2n3m1duon6brn9p646&redirect_uri=http://localhost'}">Sign up </button>
+          <div id="usernameShow"></div>
         </div>
  
       </nav>
     </header>
 
-    <main role="main">
+    <main role="main" style="margin:100px;">
 
       <div class="container" id="post">
       </div>
@@ -57,42 +56,8 @@
     <!-- Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-    <script>
-      var postId = window.jQuery.get("postId");
-
-      function postFormat(heading, text) {
-      post = '<div class="col-md-4"><h2>\
-                  ' + heading + "</h2><p>" + text + '</p> \
-                </div>';
-        return post;
-    }
-
-      (function () {
-
-      var API_ENDPOINT = "https://b0z7fvnl9c.execute-api.us-east-1.amazonaws.com/dev"
-
-      $.ajax({
-            url: API_ENDPOINT + '?postId='+postId,
-            type: 'GET',
-            success: function (response) {
-
-              jQuery.each(response, function(i,data) {
-                  // var player = "<audio controls><source src='" + data['url'] + "' type='audio/mpeg'></audio>"
-
-                  // if (typeof data['url'] === "undefined") {
-                    // var player = ""
-                  // }
-
-                $("#post").load(postFormat(data['id'], data['text']));
-              });
-            },
-            error: function () {
-                alert("error");
-            }
-        });
-          
-    })();
-    </script>
+    <script src="amazon-cognito-identity.min.js"></script>
+    <script src="mypost.js"></script>
   </body>
 
 </html>

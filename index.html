@@ -25,15 +25,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
           </ul>
-<<<<<<< HEAD
           <button type="button" class="btn btn-outline-light my-2 my-sm-0" id="loginBtn" data-toggle="modal" data-target="#loginModal">Log In</button>
           <button type="button" class="btn btn-light my-2 my-sm-0" id="signupBtn" data-toggle="modal" data-target="#signupModal" style="margin:20px">Sign Up</button>
           <div id="usernameShow"></div>
-
-=======
-          <button class="btn btn-outline-light my-2 my-sm-0" onclick="{location.href='https://hipolly52.auth.us-east-1.amazoncognito.com/login?response_type=token&client_id=55h39llc2hrj73id20mnhnvbou&redirect_uri=http://localhost'}">Log in </button>
-          <button class="btn btn-light my-2 my-sm-0" style="margin:20px"onclick="{location.href='https://hipolly52.auth.us-east-1.amazoncognito.com/signup?response_type=token&client_id=55h39llc2hrj73id20mnhnvbou&redirect_uri=http://localhost'}">Sign up </button>
->>>>>>> ec810816f3cc057d91058fe91e2aaa9f0ebbacea
         </div>
  
       </nav>
@@ -109,7 +103,7 @@
           <div class="col-md-20">
             <h2 class="featurette-heading">Demo</h2>
             <p class="lead">Hi, I am Joanna! This is just a demo text. You can turn any text into your favoriate voice. In HiPolly, you have as many as 16 voice and language choices!</p>
-            <div class="container" id="audio">
+            <div id="audio">
             </div>
           </div>
         </div>
@@ -235,9 +229,10 @@
 
     <script src="amazon-cognito-identity.min.js"></script>
     <script src="cognito.js"></script>
-    <script crossorigin="anonymous">
-              var player = "<audio controls><source src='assets/demo.mp3' type='audio/mpeg' crossorigin='anonymous'></audio>";
-              $("#audio").load(player);
+    <script>
+              var player = "<audio controls><source src='assets/demo.mp3' type='audio/mpeg'></audio>";
+              var audio = document.getElementById("audio");
+              audio.innerHTML = player;
     </script>
   </body>
 

@@ -10,11 +10,21 @@ var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 var username = ""
 var username_email = ""
 
-function postFormat(title, property) {
-      post = "<div class=\"col\" style=\"margin: 5px\"><h2 style=\"display:inline; margin: 5px\">" 
-              + title + "</h2><span class=\"badge badge-info badge-pill\">" + property + "</span></br></br><button class=\"btn btn-secondary\" onclick=\"{location.href=\'mypost.html?title=" + title + "\'}\">Listen &raquo;</button></div>";
-        return post;
-    }
+var title = getQueryVariable();
+
+function getQueryVariable() {
+  var query = window.location.search.substring(1);
+  var vari = query.split("&")[0].split("=")[1];
+  console.log('title: ' + vari);
+  return vari;
+} 
+
+
+function postFormat(heading, text, url) {
+    var player = "<audio controls><source src='" + url + "' type='audio/mpeg'></audio>"
+    post = '<div class="col-md-4"><h1>' + heading + "</h1></br>" + player + "</br><p>" + text + "</p></div>";
+    return post;
+}
 
 (function () {
       var cognitoUser = userPool.getCurrentUser();
@@ -26,8 +36,6 @@ function postFormat(title, property) {
               }
               else {
                 console.log('session validity: ' + session.isValid());
-                $('#loginBtn').hide();
-                $('#signupBtn').hide();
 
                 cognitoUser.getUserAttributes(function(err, attributes) {
                     if (err) {
@@ -40,16 +48,17 @@ function postFormat(title, property) {
                       var usernameShow = document.getElementById("usernameShow");
                       usernameShow.innerHTML = '<button type="button" class="btn btn-outline-light my-2 my-sm-0" onclick=\"{location.href=\'user.html\'}\">' + username + '</button>'
                       
-                      var API_ENDPOINT = "https://b0z7fvnl9c.execute-api.us-east-1.amazonaws.com/dev/"
+                      // API Gateway: HiPolly-GetItem
+                      var API_ENDPOINT = "https://t79ovhlh7h.execute-api.us-east-1.amazonaws.com/dev"
 
                       console.log("email: " + username_email);
                       $.ajax({
-                            url: API_ENDPOINT + '?username_email=' + username_email,
+                            url: API_ENDPOINT + '?username_email=' + username_email + '&title=' + title,
                             type: 'GET',
-                            success: function (response, status, xhr) {
-                                jQuery.each(response, function(i, data) {
-                                  $("#posts").append(postFormat(data['title'], data['property']));
-                                });
+                            success: function (data, status, xhr) {
+                                console.log(data[0]['url']);
+                                var post = document.getElementById("post");
+                                post.innerHTML = postFormat(data[0]['title'], data[0]['text'], data[0]['url']);
                             },
                             error: function (jqXHR, response) {
                                 alert(response);
@@ -61,8 +70,3 @@ function postFormat(title, property) {
           });
       };
 })();
-
-
-
-
-
