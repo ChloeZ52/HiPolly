@@ -10,19 +10,24 @@ var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 var username = ""
 var username_email = ""
 
-var title = getQueryVariable();
+var query = getQueryVariable();
 
 function getQueryVariable() {
   var query = window.location.search.substring(1);
   var vari = query.split("&")[0].split("=")[1];
-  console.log('title: ' + vari);
+  console.log('query: ' + vari);
   return vari;
 } 
 
-
-function postFormat(heading, text, url) {
-    var player = "<div style='margin: 0 auto; display: table;'><audio controls><source src='" + url + "' type='audio/mpeg'></audio></div>"
-    post = '<h1 align="center">' + heading + "</h1></br>" + player + "</br><p>" + text + "</p>";
+function postFormat(title, email, username_email) {
+    if (email == username_email) {
+      console.log(email + " " + username_email + ' you');
+      post = '<div class=\"col-lg-6\" style=\"margin: 5px\" ><h2 style=\"display:inline; margin: 5px\">' + title + "</h2><span class=\"badge badge-info badge-pill\">you</span></br></br><button class=\"btn btn-secondary\" onclick=\"{location.href=\'mysearch.html?title=" + title + "&email=" + email + "\'}\">Listen &raquo;</button></div>";
+    }
+    else {
+      console.log(email + " " + username_email + ' not you');
+      post = '<div class=\"col-lg-6\" style=\"margin: 5px\" ><h2 style=\"display:inline; margin: 5px\">' + title + "</h2></br></br><button class=\"btn btn-secondary\" onclick=\"{location.href=\'mysearch.html?title=" + title + "&email=" + email + "\'}\">Listen &raquo;</button></div>";
+    }
     return post;
 }
 
@@ -48,20 +53,22 @@ function postFormat(heading, text, url) {
                       var usernameShow = document.getElementById("usernameShow");
                       usernameShow.innerHTML = '<button type="button" class="btn btn-outline-light my-2 my-sm-0" onclick=\"{location.href=\'user.html\'}\">' + username + '</button>'
                       
-                      // API Gateway: HiPolly-GetItem
-                      var API_ENDPOINT = "https://t79ovhlh7h.execute-api.us-east-1.amazonaws.com/dev"
-
-                      console.log("email: " + username_email);
+                      // show search result from ES
+                      var API_ENDPOINT = "https://search-hipolly-3feapsk6psjha4ku6emuewk73m.us-east-1.es.amazonaws.com/";
                       $.ajax({
-                            url: API_ENDPOINT + '?username_email=' + username_email + '&title=' + title,
+                            url: API_ENDPOINT + '_search/?q=' + query,
                             type: 'GET',
                             success: function (data, status, xhr) {
-                                console.log(data[0]['url']);
-                                var post = document.getElementById("post");
-                                post.innerHTML = postFormat(data[0]['title'], data[0]['text'], data[0]['url']);
-                            },
+                                var items = data['hits']['hits'];
+                                jQuery.each(items, function(i, item) {
+                                  var result = item['_source'];
+                                  var title = result['title'];
+                                  var email = result['username_email'];
+                                  $("#result").append(postFormat(title, email, username_email));
+                                });
+                                },
                             error: function (jqXHR, response) {
-                                alert(response);
+                                alert(response + " " + jqXHR['status']);
                             }
                         });
                     }

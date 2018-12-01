@@ -11,8 +11,8 @@ var username = ""
 var username_email = ""
 
 function postFormat(title, property) {
-      post = "<div class=\"col\" style=\"margin: 5px\"><h2 style=\"display:inline; margin: 5px\">" 
-              + title + "</h2><span class=\"badge badge-info badge-pill\">" + property + "</span></br></br><button class=\"btn btn-secondary\" onclick=\"{location.href=\'mypost.html?title=" + title + "\'}\">Listen &raquo;</button></div>";
+      post = "<div class=\"col-lg-6\" style=\"margin: 5px\"><h2 style=\"display:inline; margin: 5px\">" 
+              + title + "</h2><span class=\"badge badge-info badge-pill\">" + property + "</span></br></br><button class=\"btn btn-secondary\" onclick=\"{location.href=\'mypost.html?title=" + title + "\'}\">Listen &raquo;</button></div></br>";
         return post;
     }
 

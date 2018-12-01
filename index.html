@@ -17,10 +17,12 @@
 
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.html">HiPolly</a>
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        </form>
+        <div class="collapse navbar-collapse" >
+          <a class="navbar-brand" href="index.html">HiPolly</a>
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" id="search" style="width:150px">
+        </div>
+        
+
           
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
@@ -46,8 +48,8 @@
             <img class="d-block w-100" src="assets/img1.jpeg" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
-                <h1>Turn books into voices.</h1>
-                <p style="font-size:130%;">Tired of reading books? How about listening? Let's free your eyes and hands by HiPolly!</p>
+                <h1>Turn texts into voices.</h1>
+                <p style="font-size:130%;" class="lead">Tired of reading? How about listening? Let's free your eyes and hands by HiPolly!</p>
               </div>
             </div>
           </div>
@@ -56,7 +58,7 @@
             <div class="container">
               <div class="carousel-caption">
                 <h1>Proofreading.</h1>
-                <p style="font-size:130%;">Afraid of errors in your written materials? Let's proofread by HiPolly! </p>
+                <p style="font-size:130%;" class="lead">Afraid of errors in your written materials? Let's proofread by HiPolly! </p>
               </div>
             </div>
           </div>
@@ -64,8 +66,8 @@
             <img class="d-block w-100" src="assets/img3.jpeg" alt="Third slide">
             <div class="container">
               <div class="carousel-caption text-right">
-                <h1>Learn a new language.</h1>
-                <p style="font-size:130%;">Can speak but not good at reading a foreign language? Let's learn by HiPolly!</p>
+                <h1 >Learn a new language.</h1>
+                <p style="font-size:130%;" class="lead">Can speak but not good at reading a foreign language? Let's learn by HiPolly!</p>
               </div>
             </div>
           </div>
@@ -85,15 +87,15 @@
         <div class="row">
           <div class="col-lg-4">
             <h2>Input text</h2>
-            <p>Users are able to input any texts and convert them into voices.</p>
-          </div>
-          <div class="col-lg-4">
-            <h2>Upload e-books</h2>
-            <p>Uers are able to upload any type of e-books and convert them into voices.</p>
+            <p class="lead">Users are able to input any texts and convert them into voices.</p>
           </div>
           <div class="col-lg-4">
             <h2>My library</h2>
-            <p>Users will have their own libraries where self-created books and audios as well as stared public resoucers are stored.</p>
+            <p class="lead">Users will have their own libraries where self-created books and audios as well as stared public resouces are stored.</p>
+          </div>
+          <div class="col-lg-4">
+            <h2>Search</h2>
+            <p class="lead">Uers are able to search any public resouces uploaded by users of HiPolly.</p>
           </div>
         </div>
 
@@ -103,10 +105,21 @@
           <div class="col-md-20">
             <h2 class="featurette-heading">Demo</h2>
             <p class="lead">Hi, I am Joanna! This is just a demo text. You can turn any text into your favoriate voice. In HiPolly, you have as many as 16 voice and language choices!</p>
-            <div id="audio">
+            <div id="audio-Joanna">
             </div>
           </div>
         </div>
+        
+        <div class="row featurette">
+          <div class="col-md-20">
+            <h2 class="featurette-heading"> 演示</h2>
+            <p class="lead">你好，我是知语。这只是一个演示文本。你可以将任何文本转换成你喜欢的音频。HiPolly提供16种声音以及语言的选择。</p>
+            <div id="audio-Zhiyu">
+            </div>
+          </div>
+        </div>
+          
+          
 
         <hr class="featurette-divider">
       </div>
@@ -230,9 +243,21 @@
     <script src="amazon-cognito-identity.min.js"></script>
     <script src="cognito.js"></script>
     <script>
-              var player = "<audio controls><source src='assets/demo.mp3' type='audio/mpeg'></audio>";
-              var audio = document.getElementById("audio");
-              audio.innerHTML = player;
+              var player_Joanna = "<audio controls><source src='assets/demo-Joanna.mp3' type='audio/mpeg'></audio>";
+              var audio_Joanna = document.getElementById("audio-Joanna");
+              audio_Joanna.innerHTML = player_Joanna;
+        
+              var player_Zhiyu = "<audio controls><source src='assets/demo-Zhiyu.mp3' type='audio/mpeg'></audio>";
+              var audio_Zhiyu = document.getElementById("audio-Zhiyu");
+              audio_Zhiyu.innerHTML = player_Zhiyu;
+        
+              $('#search').bind("keyup", function(event){
+                if (event.keyCode == 13) {
+                    console.log($('#search').val());
+                    window.location.replace("search.html?q=" + $('#search').val());
+                    
+                }
+              });
     </script>
   </body>
 

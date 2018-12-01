@@ -35,7 +35,7 @@ if (cognitoUser != null) {
     });
 };
 
-// create a new item in DynamoDB
+// input text and create a new item in DynamoDB
 document.getElementById("sayButton").onclick = function(){
 
 	var inputData = {
@@ -44,6 +44,62 @@ document.getElementById("sayButton").onclick = function(){
 		"text" : $('#postText').val(),
 		"username_email": username_email,
 		"property": $('#propertySelected option:selected').val()
+	};
+
+	$.ajax({
+	      url: API_ENDPOINT,
+	      type: 'POST',
+	      crossDomain: true,
+	      data:  JSON.stringify(inputData)  ,
+	      contentType: 'application/json; charset=utf-8',
+	      success: function (data, status, xhr) {
+					alert("Congratulations, you have created a new item!\nPlease check in \"My library\"");
+	      },
+	      error: function (jqXHR, response) {
+	      	var statusCode = jqXHR.status;
+	      	if (statusCode == 444) {
+	      		alert("This title has already exists, please choose a new one.")
+	      	}
+	      }
+	  });
+}
+
+
+//  upload text file and create a new item in DynamoDB
+document.getElementById('textFile').addEventListener('change', getFile)
+
+function getFile(event) {
+	const input = event.target
+    if ('files' in input && input.files.length > 0) {
+	  placeFileContent(
+      document.getElementById('content-target'),
+      input.files[0])
+    }
+}
+
+function placeFileContent(target, file) {
+	readFileContent(file).then(content => {
+  	target.value = content
+  }).catch(error => console.log(error))
+}
+
+function readFileContent(file) {
+	const reader = new FileReader()
+  return new Promise((resolve, reject) => {
+    reader.onload = event => resolve(event.target.result)
+    reader.onerror = error => reject(error)
+    reader.readAsText(file)
+  })
+}
+
+document.getElementById("uploadButton").onclick = function(){
+
+	var inputData = {
+		"voice": $('#voiceSelected_upload option:selected').val(),
+		"title": $('#title_upload').val(),
+		"text" : $('#content-target').val(),
+		"username_email": username_email,
+		"property": $('#propertySelected_upload option:selected').val()
 	};
 
 	$.ajax({
