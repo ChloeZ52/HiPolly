@@ -61,10 +61,12 @@ function postFormat(title, email, username_email) {
                             success: function (data, status, xhr) {
                                 var items = data['hits']['hits'];
                                 jQuery.each(items, function(i, item) {
-                                  var result = item['_source'];
-                                  var title = result['title'];
-                                  var email = result['username_email'];
-                                  $("#result").append(postFormat(title, email, username_email));
+                                  if (item['_index'] == 'hipolly') {
+                                    var result = item['_source'];
+                                    var title = result['title'];
+                                    var email = result['username_email'];
+                                    $("#result").append(postFormat(title, email, username_email));
+                                }
                                 });
                                 },
                             error: function (jqXHR, response) {
