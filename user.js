@@ -1,4 +1,5 @@
 var API_ENDPOINT = "https://b0z7fvnl9c.execute-api.us-east-1.amazonaws.com/dev/"
+$("#signoutBtn").hide();
 var username_email = ""
 // get and display the username
 
@@ -29,6 +30,7 @@ if (cognitoUser != null) {
         	username_email = attributes[3].getValue();
     		console.log("email: " + username_email);
         	var username = attributes[2].getValue();
+        	$("#signoutBtn").show();
 			var usernameShow = document.getElementById("usernameShow");
 			usernameShow.innerHTML = '<button type="button" class="btn btn-outline-light my-2 my-sm-0" onclick=\"{location.href=\'user.html\'}\">' + username + '</button>'
         }
@@ -119,6 +121,15 @@ document.getElementById("uploadButton").onclick = function(){
 	      }
 	  });
 }
+
+$("#signoutBtn").click(function () {
+	var cognitoUser = userPool.getCurrentUser();
+	if (cognitoUser != null) {
+          cognitoUser.signOut();
+          console.log("successfully logged out!");
+          window.location.replace("index.html");
+        }
+});
 
 
 

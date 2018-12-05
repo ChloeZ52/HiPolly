@@ -1,3 +1,4 @@
+$("#signoutBtn").hide();
 // get and display the username
 
 var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
@@ -50,6 +51,7 @@ function postFormat(title, email, username_email) {
                     else {
                       username_email = attributes[3].getValue();
                       username = attributes[2].getValue();
+                      $("#signoutBtn").show();
                       var usernameShow = document.getElementById("usernameShow");
                       usernameShow.innerHTML = '<button type="button" class="btn btn-outline-light my-2 my-sm-0" onclick=\"{location.href=\'user.html\'}\">' + username + '</button>'
                       
@@ -79,3 +81,12 @@ function postFormat(title, email, username_email) {
           });
       };
 })();
+
+$("#signoutBtn").click(function () {
+  var cognitoUser = userPool.getCurrentUser();
+  if (cognitoUser != null) {
+          cognitoUser.signOut();
+          console.log("successfully logged out!");
+          window.location.replace("index.html");
+        }
+});

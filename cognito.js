@@ -10,6 +10,38 @@ var poolData = {
     };
 
 var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+$("#signoutBtn").hide();
+
+(function () {
+	var cognitoUser = userPool.getCurrentUser();
+    if (cognitoUser != null) {
+          cognitoUser.getSession(function(err, session) {
+              if (err) {
+                  alert(err.message || JSON.stringify(err));
+                  return;
+              }
+              else {
+                console.log('session validity: ' + session.isValid());
+                $('#loginBtn').hide();
+                $('#signupBtn').hide();
+              }
+          });
+
+                cognitoUser.getUserAttributes(function(err, attributes) {
+                    if (err) {
+                        alert(err.message || JSON.stringify(err));
+                    return;
+                    } 
+                    else {
+                      username_email = attributes[3].getValue();
+                      username = attributes[2].getValue();
+                      $("#signoutBtn").show();
+                      var usernameShow = document.getElementById("usernameShow");
+                      usernameShow.innerHTML = '<button type="button" class="btn btn-outline-light my-2 my-sm-0" onclick=\"{location.href=\'user.html\'}\">' + username + '</button>'
+                    }
+               });
+    };
+})();
 
 // user sign up
 $("#signup").click(function () {
@@ -81,6 +113,7 @@ $("#veri").click(function () {
 					$('#loginModal').modal('hide');
 		    		$('#loginBtn').hide();
 		    		$('#signupBtn').hide();
+		    		$("#signoutBtn").show();
 
 		    		cognitoUser.getUserAttributes(function(err, result) {
 		        		if (err) {
@@ -127,6 +160,7 @@ $("#login").click(function () {
 			$('#loginModal').modal('hide');
     		$('#loginBtn').hide();
     		$('#signupBtn').hide();
+    		$("#signoutBtn").show();
 
     		cognitoUser.getUserAttributes(function(err, result) {
         		if (err) {
@@ -147,6 +181,15 @@ $("#login").click(function () {
 
     });
    
+});
+
+$("#signoutBtn").click(function () {
+	var cognitoUser = userPool.getCurrentUser();
+	if (cognitoUser != null) {
+          cognitoUser.signOut();
+          console.log("successfully logged out!");
+          window.location.replace("index.html");
+        }
 });
 
 

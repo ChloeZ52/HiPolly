@@ -1,3 +1,5 @@
+$("#signoutBtn").hide();
+
 // get and display the username
 
 var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
@@ -28,10 +30,10 @@ function getQueryVariable() {
 function postFormat(heading, text, url, email, username_email) {
     var player = "<div style='margin: 0 auto; display: table;'><audio controls><source src='" + url + "' type='audio/mpeg'></audio></div>"
     if (email == username_email) {
-      post = '<h1 align="center" style=\"margin: 5px;\">' + heading + "</h1></br>" + player + "</br><p>" + text + "</p>";
+      post = '<h1 align="center">' + heading + "</h1></br>" + player + "</br><p>" + text + "</p>";
     }
     else {
-      post = '<h1 align="center" style=\"margin: 5px;\">' + heading + "<button type=\"button\" class=\"btn btn-outline-primary btn-sm\" onclick=\"save()\">save</button></h1></br>" + player + "</br><p>" + text + "</p>";
+      post = '<h1 align="center">' + heading + "<button type=\"button\" class=\"btn btn-primary btn-sm\" style=\"margin: 5px;\" onclick=\"save()\">save</button></h1></br>" + player + "</br><p>" + text + "</p>";
     }
     return post;
 }
@@ -55,6 +57,7 @@ function postFormat(heading, text, url, email, username_email) {
                     else {
                       username_email = attributes[3].getValue();
                       username = attributes[2].getValue();
+                      $("#signoutBtn").show();
                       var usernameShow = document.getElementById("usernameShow");
                       usernameShow.innerHTML = '<button type="button" class="btn btn-outline-light my-2 my-sm-0" onclick=\"{location.href=\'user.html\'}\">' + username + '</button>'
                       
@@ -108,4 +111,14 @@ function save(){
           }
         }
     });
+  $('#save').hide();
 }
+
+$("#signoutBtn").click(function () {
+  var cognitoUser = userPool.getCurrentUser();
+  if (cognitoUser != null) {
+          cognitoUser.signOut();
+          console.log("successfully logged out!");
+          window.location.replace("index.html");
+        }
+});
