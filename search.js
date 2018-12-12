@@ -61,6 +61,7 @@ function postFormat(title, email, username_email) {
                             url: API_ENDPOINT + '_search/?q=' + query,
                             type: 'GET',
                             success: function (data, status, xhr) {
+                                console.log(API_ENDPOINT + '_search/?q=' + query)
                                 var items = data['hits']['hits'];
                                 jQuery.each(items, function(i, item) {
                                   if (item['_index'] == 'hipolly') {
